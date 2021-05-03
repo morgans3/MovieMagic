@@ -9,18 +9,18 @@ namespace RestAPI.Data
 {
     public class MockRestAPIRepo : IRestAPIRepo
     {
+        public int _maxlimit = 500;
+        public int _lowerlimit = 100;
         public Movie[] GetAllCommands()
         {
             StreamReader r = File.OpenText("Data/moviedata.json");
             var json = r.ReadToEnd();
             Movie[] jss = JsonConvert.DeserializeObject<Movie[]>(json);
-            return jss.Take(500).ToArray();
+            return jss.Take(_maxlimit).ToArray();
         }
 
         public Movie[] GetCommandsByProperty(string property, object value)
         {
-            var _limit = 100;
-
             StreamReader r = File.OpenText("Data/moviedata.json");
             var json = r.ReadToEnd();
             Movie[] jss = JsonConvert.DeserializeObject<Movie[]>(json);
@@ -58,7 +58,7 @@ namespace RestAPI.Data
                         return false;
                     }
                     return false;
-                }).Take(_limit).ToArray();
+                }).Take(_lowerlimit).ToArray();
                 if (response.Length > 0) return response;
                 return null;
             }
@@ -71,7 +71,7 @@ namespace RestAPI.Data
                     return prop.GetValue(c).ToString().Contains(value.ToString());
                 }
                 return false;
-            }).Take(_limit).ToArray();
+            }).Take(_lowerlimit).ToArray();
             if (first.Length > 0) return first;
             return null;
         }
