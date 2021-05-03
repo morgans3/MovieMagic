@@ -1,0 +1,4 @@
+.carousel-item > img {
+  min-width: unset !important;
+  left: 25%;
+}

@@ -1,0 +1,15 @@
+<div *ngIf="!dataLoaded">Loading...</div>
+
+<div class="row wrap">
+  <div fxFlex="100" fxLayoutAlign="center center">
+    <h3 *ngIf="movielist && dataLoaded">LATEST RELEASES</h3>
+  </div>
+</div>
+
+<hr style="margin: 20px 0px; line-height: 2px; background-color: white" />
+
+<ngb-carousel *ngIf="movielist && dataLoaded">
+  <ng-template ngbSlide *ngFor="let movie of movielist; let i = index">
+    <app-moviedisplay mode="feature" [movie]="movie"></app-moviedisplay>
+  </ng-template>
+</ngb-carousel>

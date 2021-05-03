@@ -1,0 +1,50 @@
+<div *ngIf="movie">
+  <div class="row wrap" *ngIf="mode && mode === 'search'">
+    <div fxFlex.gt-xs="50" fxFlex="50" fxLayoutAlign="end center"><img class="thumbnail" [src]="thisPoster(movie)" [alt]="movie.title" /></div>
+    <div fxFlex.gt-xs="50" fxFlex="50">
+      {{ movie.title }} - {{ movie.year }} <br />
+      <br />
+      <a [routerLink]="['/movie', movie.year, movie.title]">More Details</a>
+    </div>
+  </div>
+
+  <div class="row wrap" *ngIf="mode && mode === 'feature'">
+    <div fxFlex.gt-xs="50" fxFlex="50" fxLayoutAlign="center center">
+      <img [src]="thisPoster(movie)" [alt]="movie.title" />
+    </div>
+    <div fxFlex.gt-xs="50" fxFlex="50">
+      <div>
+        <h3>{{ movie.title + " (" + movie.year + ")" }}</h3>
+        <p>{{ movie.info.plot }}</p>
+        <a class="btn btn-primary" [routerLink]="['/movie', movie.year, movie.title]">Full Detail</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row wrap" *ngIf="mode && mode === 'detail'">
+    <div fxFlex.gt-xs="50" fxFlex="50" fxLayoutAlign="center center">
+      <img [src]="thisPoster(movie)" [alt]="movie.title" />
+    </div>
+    <div fxFlex.gt-xs="50" fxFlex="50">
+      <div>
+        <h3>{{ movie.title + " (" + movie.year + ")" }}</h3>
+        <p *ngIf="movie.info.release_date"><strong>Release Date: </strong> {{ movie.info.release_date | date: "yyyy-MM-dd" }}</p>
+        <p *ngIf="movie.info.genres"><strong>Genres: </strong> {{ movie.info.genres }}</p>
+        <p *ngIf="movie.info.plot"><strong>Plot: </strong> {{ movie.info.plot }}</p>
+        <p *ngIf="movie.info.running_time_secs"><strong>Running Time: </strong> {{ movie.info.running_time_secs }}</p>
+        <p *ngIf="movie.info.rating"><strong>Rating: </strong> {{ movie.info.rating }}</p>
+        <p *ngIf="movie.info.rank"><strong>Rank: </strong> {{ movie.info.rank }}</p>
+        <p><strong>Directed By: </strong></p>
+        <ul *ngIf="movie.info.directors && movie.info.directors.length > 0">
+          <li *ngFor="let dir of movie.info.directors">{{ dir }}</li>
+        </ul>
+        <p *ngIf="!movie.info.directors || movie.info.directors.length === 0">No Directors listed.</p>
+        <p><strong>Actors: </strong></p>
+        <ul *ngIf="movie.info.actors && movie.info.actors.length > 0">
+          <li *ngFor="let dir of movie.info.actors">{{ dir }}</li>
+        </ul>
+        <p *ngIf="!movie.info.actors || movie.info.actors.length === 0">No Actors listed.</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<form class="form-inline">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" (click)="showdrop = !showdrop">{{ currentsearchtype.displayname }}</button>
+    <div class="dropdown-menu" [class.visible]="showdrop">
+      <span *ngFor="let opt of searchOptions" class="dropdown-item" (click)="changesearchtype($event.target)">{{ opt.displayname }}</span>
+    </div>
+  </div>
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchbar" name="searcher" />
+  <button class="btn btn-primary" type="button" (click)="searchMovies()"><i class="fas fa-search"></i></button>
+</form>

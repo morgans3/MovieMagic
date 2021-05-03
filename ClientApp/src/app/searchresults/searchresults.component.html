@@ -1,0 +1,9 @@
+<div class="row wrap" *ngIf="movielist.length > 0">
+  <div *ngFor="let movie of movielist" fxFlex.gt-xs="50" fxFlex="25" style="margin: 10px 0px">
+    <app-moviedisplay mode="search" [movie]="movie"></app-moviedisplay>
+  </div>
+</div>
+
+<div class="row wrap" *ngIf="movielist.length === 0">
+  <div fxFlex.gt-xs="100" fxFlex="100" fxLayoutAlign="center center">No Search Results</div>
+</div>
